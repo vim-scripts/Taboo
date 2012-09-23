@@ -1,0 +1,12 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4237
+
+
+This plugin allow you to:
+
+* customize what information is displayed into each tab label (file name, the entire path, tab number, tab windows, ecc...)
+
+* rename tabs with the name you want to keep better organized your daily projects
+
+look here for more informations: https://github.com/gcmt/taboo.vim
+
+ONLY TERMINAL VIM SUPPORT!

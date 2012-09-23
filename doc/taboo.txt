@@ -1,0 +1,181 @@
+*taboo.txt*    
+*taboo*
+
+                                   Taboo
+                 manage and rename your tabs in terminal vim
+
+                                     ~
+                              Reference Manual
+
+==============================================================================
+CONTENTS                                                      *taboo-contents*
+
+    1. Overview ..............................|taboo-overview|
+    2. Installation ..........................|taboo-installation|
+    3. Mappings ..............................|taboo-mappings|
+    4. Commands ..............................|taboo-commands|
+    5. Options ...............................|taboo-options|
+        5.1 General behaviour ................|taboo-behaviour|
+        5.2 Tabs UI options ..................|taboo-tabs-ui|
+    6. Changelog .............................|taboo-changelog| 
+    7. Contributors ..........................|taboo-ontributors|
+
+
+==============================================================================
+1. Overview                                                   *taboo-overview*
+
+Taboo is a little plugin for managing and customizing tabs in terminal vim. 
+It allow yout to:
+
+    * Rename tabs with the name you prefer
+    * Customize what is displayed in each tab label
+
+Why the plugin works only with the terminal version of vim? It seems there is
+bug in MacVim (or a bad behaviour) that prevents the plugin to know which tabs 
+has been closed when more than one tab are opened. Waiting for a solution I 
+decided to not support gui versions at the moment.
+
+
+==============================================================================
+2. Installation                                           *taboo-installation*
+
+To let this plugin do its job you need to add the following lines to your 
+.vimrc file:
+
+    set tabline=%!TabooTabline()
+
+and be sure to let your tabs shining:
+
+    set showtabline=1  " to display the tabline only when 2+ tabs are opened
+
+or
+
+    set showtabline=2  " to always show the tabline
+
+
+==============================================================================
+3. Mappings                                                   *taboo-mappings*
+
+All the defined mappings. If |g:taboo_enable_mappings| is set to 0 these will
+not be defined. See |taboo-commands| for commands explanations.
+
+nnoremap <silent> <leader>tt :TabooRenameTabPrompt<CR>
+    
+nnoremap <silent> <leader>to :TabooOpenTabPrompt<CR>
+    
+nnoremap <silent> <leader>tr :TabooResetName<CR>
+
+
+==============================================================================
+4. Commands                                                   *taboo-commands*
+
+TabooRenameTab <name>                                         *TabooRenameTab* 
+
+To rename the current tab. An argument (the new tab name) is required.
+    
+
+TabooRenameTabPrompt                                    *TabooRenameTabPrompt* 
+
+To rename the current tab. A prompt will open to ask for the new tab name.
+
+
+TabooOpenTab <name>                                             *TabooOpenTab*
+
+To open a new tab next to active. An argument (the tab name) is required.
+
+
+TabooOpenTabPrompt                                        *TabooOpenTabPrompt*
+
+To open a new tab next to active. A prompt will open to ask for the tab name.
+
+
+TabooResetTabName                                          *TabooResetTabName*
+
+To reset the tab name to its original name.
+
+
+==============================================================================
+5. Options                                                     *taboo-options*
+
+
+______________________________________________________________________________
+5.1 General behaviour
+
+g:taboo_enable_mappings                             *g:taboo_enable_mappings* 
+Set this option to 0 if you want to prevent the plugin to sets mappings that
+may interfere with your configuration.
+
+default: 1
+
+g:taboo_open_empty_tab                               *g:taboo_open_empty_tab* 
+If you set this option to 0, whenever you open a new tab Taboo will try to 
+it with the current buffer
+
+default: 1
+
+______________________________________________________________________________
+5.2 Tabs UI options
+
+g:taboo_format                                                *g:taboo_format* 
+With this option you can customize the way normal tabs (not renamed tabs) are
+displayed. Below all the available items that can be used: 
+
+   tab name:
+   %f -> file name in normal tab
+   %F -> path relative to $HOME
+   %a -> absolute path
+   %[n]a -> custom level of path depth
+
+   NOTE: in renamed tabs, the items %f, %F, %a and %[n]a will be avaluated to 
+         the custom label associated to that tab.
+
+   tab number:
+   %n -> show tab number only on the active tab
+   %N -> show always tab number
+
+   other flags:
+   %m -> modified flag
+   %w -> number of windows opened into the tab
+
+default: " %f%m "
+
+
+g:taboo_format_renamed                                *g:taboo_format_renamed* 
+Same as |g:taboo_format| but for renamed tabs.
+
+default: " [%f]%m "
+
+
+6:taboo_modified_flag                                  *g:taboo_modified_flag* 
+Set this option if you prefer a different string for the modified flag.
+
+default: "*"
+
+
+g:taboo_close_label                                      *g:taboo_close_label* 
+Set this option if you want a flag on the tabline who close the tabline itself 
+when clicked. The flag will appear at the right side of the tabline. This 
+position is fixed. When the value is an empty string nothing will be displaed.
+
+default: ''
+
+
+g:taboo_unnamed_label                                  *g:taboo_unnamed_label* 
+Set this option if you prefer a different name for tabs containing an unnamed
+buffer.
+
+default: "[no name]"
+
+
+==============================================================================
+6. Changelog                                                 *taboo-changelog*
+
+
+==============================================================================
+7. Credits                                                     *taboo-credits*
+
+Developed by Giacomo Comitti
+
+Git repository: https://github.com/gcmt/taboo.vim
+
+Contributors:
