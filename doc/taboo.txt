@@ -39,18 +39,14 @@ decided to not support gui versions at the moment.
 ==============================================================================
 2. Installation                                           *taboo-installation*
 
-To let this plugin do its job you need to add the following lines to your 
-.vimrc file:
+Once you have installed the plugin there is no further configuration to do. The
+plugin is ready to be used.
 
-    set tabline=%!TabooTabline()
+NOTE: tabs look different in terminal vim than in gui versions. If you wish
+having terminal style tabs even in gui versions you have to add the following
+line to your .vimrc file:  
 
-and be sure to let your tabs shining:
-
-    set showtabline=1  " to display the tabline only when 2+ tabs are opened
-
-or
-
-    set showtabline=2  " to always show the tabline
+    set guioptions-=e 
 
 
 ==============================================================================

@@ -1,19 +1,20 @@
 " =============================================================================
 " File: taboo.vim
-" Description: A little plugin for managing tabs in terminal vim  
+" Description: A little plugin for managing tabs in vim  
 " Mantainer: Giacomo Comitti (https://github.com/gcmt)
 " Url: https://github.com/gcmt/taboo.vim
 " License: MIT
-" Version: 0.1.0
-" Last Changed: 23 Sep 2012
+" Version: 0.1.1
+" Last Changed: 29 Sep 2012
 " =============================================================================
 
 " Init ------------------------------------------ {{{
 
-if exists("g:loaded_taboo") || &cp || has("gui_running")
+if exists("g:loaded_taboo") || &cp || v:version < 703
     finish
 endif
 let g:loaded_taboo = 1
+
 
 " }}}
 
@@ -63,15 +64,15 @@ endif
 " =============================================================================
 
 " TabooTabline ---------------------------------- {{{
-" This function construct the tabline string (only in terminal vim)
+" This function construct the tabline string for terminal vim
 " The whole tabline is constructed at once.
 "
 function! TabooTabline()
     let tabln = ''
     for i in range(1, tabpagenr('$'))
 
-        let label = gettabvar(i, 'tab_label')
-        if empty(label)  " not renamed
+        let renamed = gettabvar(i, 'tab_label')
+        if empty(renamed)  " not renamed
             let label_items = s:parse_fmt_str(g:taboo_format)
         else
             let label_items = s:parse_fmt_str(g:taboo_format_renamed)
@@ -85,6 +86,22 @@ function! TabooTabline()
     let tabln .= '%=%#TabLine#%999X' . g:taboo_close_label
 
     return tabln
+endfunction
+" }}}
+
+" TabooGuiLabel --------------------------------- {{{
+" This function construct a single tab label for gui vim
+function! TabooGuiLabel()
+
+    let renamed = gettabvar(v:lnum, 'tab_label')
+    if empty(renamed)  " not renamed
+        let label_items = s:parse_fmt_str(g:taboo_format)
+    else
+        let label_items = s:parse_fmt_str(g:taboo_format_renamed)
+    endif
+
+    return s:expand_fmt_str(v:lnum, label_items)
+    
 endfunction
 " }}}
 
@@ -303,6 +320,7 @@ command! -nargs=0 TabooRenameTabPrompt call s:RenameTabPrompt()
 command! -nargs=0 TabooOpenTabPrompt call s:OpenNewTabPrompt()
 command! -nargs=0 TabooResetName call s:ResetTabName()
 
+
 " MAPPINGS
 " =============================================================================
 
@@ -317,9 +335,10 @@ endif
 " =============================================================================
 
 augroup taboo
+    au!
     au TabEnter * call s:add_curr_tab() 
+    au VimEnter * set tabline=%!TabooTabline()
+    au VimEnter * if has('gui_running')|
+                    \ set guitablabel=%!TabooGuiLabel()|
+                \ endif        
 augroup END
-
-
-
-

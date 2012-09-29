@@ -1,13 +1,14 @@
-TabooCloseTab	taboo.txt	/*TabooCloseTab*
 TabooOpenTab	taboo.txt	/*TabooOpenTab*
 TabooOpenTabPrompt	taboo.txt	/*TabooOpenTabPrompt*
 TabooRenameTab	taboo.txt	/*TabooRenameTab*
 TabooRenameTabPrompt	taboo.txt	/*TabooRenameTabPrompt*
 TabooResetTabName	taboo.txt	/*TabooResetTabName*
 g:taboo_close_label	taboo.txt	/*g:taboo_close_label*
+g:taboo_enable_mappings	taboo.txt	/*g:taboo_enable_mappings*
 g:taboo_format	taboo.txt	/*g:taboo_format*
 g:taboo_format_renamed	taboo.txt	/*g:taboo_format_renamed*
 g:taboo_modified_flag	taboo.txt	/*g:taboo_modified_flag*
+g:taboo_open_empty_tab	taboo.txt	/*g:taboo_open_empty_tab*
 g:taboo_unnamed_label	taboo.txt	/*g:taboo_unnamed_label*
 taboo	taboo.txt	/*taboo*
 taboo-changelog	taboo.txt	/*taboo-changelog*
